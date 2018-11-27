@@ -1,7 +1,15 @@
 #ifndef TINY_GLTF_H
 #define TINY_GLTF_H 1
 
+#ifdef __MINGW32__
+#include <winsock2.h>
+#include <windows.h>
+#endif
+
+#include <time.h> // work around C++/C linkage error on some platforms
+
 #if __cplusplus
+  #include <algorithm>
   #include "tiny_gltf.h"
   using namespace tinygltf;
   extern "C" {
