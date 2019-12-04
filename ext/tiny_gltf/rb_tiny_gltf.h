@@ -35,6 +35,8 @@ extern VALUE rb_mTinyGLTF,
   VALUE name ## _is_equal(VALUE self, VALUE other);     \
   VALUE name ## _alloc(VALUE klass);
 
+#define RINDEX_OR_NIL(n) (n == -1 ? Qnil : INT2NUM(n))
+
 GLTF_TYPE(Model);
 GLTF_TYPE(Accessor);
 GLTF_TYPE(Asset);
@@ -68,18 +70,26 @@ VALUE texture_type_to_sym(int type);
 VALUE target_to_sym(int tgt);
 VALUE shader_type_to_sym(int type);
 
-VALUE Accessor_byte_stride(VALUE self, VALUE buffer_view);
+VALUE Buffer_to_ptr(VALUE self);
+VALUE Buffer_size(VALUE self);
+VALUE Buffer_to_s(VALUE self);
+VALUE Buffer_uri(VALUE self);
+VALUE Image_set_uri(VALUE self, VALUE uri);
+VALUE Image_to_ptr(VALUE self);
+VALUE Image_size(VALUE self);
+VALUE Image_to_s(VALUE self);
+VALUE Image_uri(VALUE self);
 
 #if __cplusplus
   /*
-    VALUE rModel_new(const Model *);
+    VALUE rAccessor_new(const Accessor *, VALUE);
   */
-  #define GLTF_RUBY_WRAP(klass) VALUE r ## klass ## _new(const klass *);
+  #define GLTF_RUBY_WRAP(klass) VALUE r ## klass ## _new(const klass *, VALUE);
 
   /*
-    static inline Model *Model_unwrap(VALUE val) {
-      Model *a = NULL;
-      TypedData_Get_Struct(val, Model, &T_Model, a);
+    static inline Accessor *Accessor_unwrap(VALUE val) {
+      Accessor *a = NULL;
+      TypedData_Get_Struct(val, Accessor, &T_Accessor, a);
       if (a == NULL)
         rb_raise(rb_eArgError, "BUG: " #name " is NULL");
       return a;
@@ -101,9 +111,10 @@ VALUE Accessor_byte_stride(VALUE self, VALUE buffer_view);
   GLTF_RUBY_WRAP(ParameterMap);
   GLTF_RUBY_WRAP(Value);
 
+  VALUE rModel_new(const Model *);
+  GLTF_RUBY_UNWRAP(Model);
   GLTF_RUBY_WRAPPERS(Asset);
   GLTF_RUBY_WRAPPERS(Primitive);
-  GLTF_RUBY_WRAPPERS(Model);
   GLTF_RUBY_WRAPPERS(Accessor);
   GLTF_RUBY_WRAPPERS(Animation);
   GLTF_RUBY_WRAPPERS(AnimationSampler);

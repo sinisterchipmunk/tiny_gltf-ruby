@@ -1,6 +1,6 @@
 #include "rb_tiny_gltf.h"
 
-VALUE rValue_new(const Value *value) {
+VALUE rValue_new(const Value *value, VALUE rmodel) {
   switch(value->Type()) {
     case NULL_TYPE:   return Qnil;
     case NUMBER_TYPE: return DBL2NUM(value->Get<double>());
@@ -14,7 +14,7 @@ VALUE rValue_new(const Value *value) {
     case ARRAY_TYPE: {
       VALUE ary = rb_ary_new();
       for (size_t i = 0; i < value->ArrayLen(); i++) {
-        rb_ary_push(ary, rValue_new(&value->Get((int) i)));
+        rb_ary_push(ary, rValue_new(&value->Get((int) i), rmodel));
       }
       return ary;
     }
@@ -22,7 +22,7 @@ VALUE rValue_new(const Value *value) {
       VALUE hash = rb_hash_new();
       std::vector<std::string> keys = value->Keys();
       for (std::string key : keys) {
-        rb_hash_aset(hash, rb_str_new2(key.c_str()), rValue_new(&value->Get(key)));
+        rb_hash_aset(hash, rb_str_new2(key.c_str()), rValue_new(&value->Get(key), rmodel));
       }
       return hash;
     }

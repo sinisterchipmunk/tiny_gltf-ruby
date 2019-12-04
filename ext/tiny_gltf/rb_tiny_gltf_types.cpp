@@ -1,12 +1,12 @@
 #include "rb_tiny_gltf.h"
 
 /*
-  void model_free(void* data) {
-    Model *model = (Model *) data;
-    delete model;
+  void Model_free(void* data) {
+    Model *obj = (Model *) data;
+    delete obj;
   }
 
-  size_t model_size(const void* data) {
+  size_t Model_size(const void* data) {
     return sizeof(Model);
   }
 
@@ -14,8 +14,8 @@
     .wrap_struct_name = "TinyGLTFModel",
     .function = {
       .dmark = NULL,
-      .dfree = model_free,
-      .dsize = model_size,
+      .dfree = Model_free,
+      .dsize = Model_size,
       .reserved = { 0, 0 }
     },
     .parent = NULL,
@@ -23,7 +23,7 @@
     .flags = RUBY_TYPED_FREE_IMMEDIATELY
   };
 
-  VALUE alloc_model(VALUE klass) {
+  VALUE Model_alloc(VALUE klass) {
     return TypedData_Wrap_Struct(klass, &T_Model, new Model());
   }
 

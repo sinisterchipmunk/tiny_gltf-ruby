@@ -1,6 +1,6 @@
 #include "rb_tiny_gltf.h"
 
-VALUE rPrimitive_new(const Primitive *prim) {
+VALUE rPrimitive_new(const Primitive *prim, VALUE rmodel) {
   VALUE rprim = rb_funcall(rb_cPrimitive, rb_intern("new"), 0);
   // *Primitive_unwrap(rprim) = *prim;
 
@@ -24,12 +24,13 @@ VALUE rPrimitive_new(const Primitive *prim) {
     }
   }
 
-  rb_ivar_set(rprim, rb_intern("@attributes"),     rattrs);
-  rb_ivar_set(rprim, rb_intern("@material_index"), INT2NUM(prim->material));
-  rb_ivar_set(rprim, rb_intern("@indices"),        INT2NUM(prim->indices));
-  rb_ivar_set(rprim, rb_intern("@mode"),           mode_to_sym(prim->mode));
-  rb_ivar_set(rprim, rb_intern("@morph_targets"),  rtargets);
-  rb_ivar_set(rprim, rb_intern("@extras"),         rValue_new(&prim->extras));
+  rb_ivar_set(rprim, rb_intern("@model"),                 rmodel);
+  rb_ivar_set(rprim, rb_intern("@attributes"),            rattrs);
+  rb_ivar_set(rprim, rb_intern("@material_index"),        RINDEX_OR_NIL(prim->material));
+  rb_ivar_set(rprim, rb_intern("@indices_index"),         RINDEX_OR_NIL(prim->indices));
+  rb_ivar_set(rprim, rb_intern("@mode"),                  mode_to_sym(prim->mode));
+  rb_ivar_set(rprim, rb_intern("@morph_targets_indices"), rtargets);
+  rb_ivar_set(rprim, rb_intern("@extras"),                rValue_new(&prim->extras, rmodel));
 
   return rprim;
 }

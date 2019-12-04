@@ -12,24 +12,24 @@ VALUE rModel_new(const Model *model) {
   for (size_t i = 0; i < model->extensionsRequired.size(); i++)
     rb_ary_push(rext_required, rb_str_new2(model->extensionsRequired[i].c_str()));
 
-  rb_ivar_set(rmodel, rb_intern("@asset"),               rAsset_new(&model->asset));
-  rb_ivar_set(rmodel, rb_intern("@default_scene_index"), INT2NUM(model->defaultScene));
-  rb_ivar_set(rmodel, rb_intern("@extensions"),          rExtensionMap_new(&model->extensions));
-  rb_ivar_set(rmodel, rb_intern("@extras"),              rValue_new(&model->extras));
+  rb_ivar_set(rmodel, rb_intern("@asset"),               rAsset_new(&model->asset, rmodel));
+  rb_ivar_set(rmodel, rb_intern("@default_scene_index"), RINDEX_OR_NIL(model->defaultScene));
+  rb_ivar_set(rmodel, rb_intern("@extensions"),          rExtensionMap_new(&model->extensions, rmodel));
+  rb_ivar_set(rmodel, rb_intern("@extras"),              rValue_new(&model->extras, rmodel));
   rb_ivar_set(rmodel, rb_intern("@extensions_used"),     rext_used);
   rb_ivar_set(rmodel, rb_intern("@extensions_required"), rext_required);
 
   /*
     VALUE ary = rb_funcall(rmodel, rb_intern("accessors"), 0);
     for (size_t i = 0; i < model->accessors.size(); i++) {
-      rb_ary_push(ary, rAccessor_new(&model->accessors[i]));
+      rb_ary_push(ary, rAccessor_new(&model->accessors[i], rmodel));
     }
   */
-  #define CONCAT_VECTOR_TO_RARRAY3(klass, name, method) {    \
-    VALUE ary = rb_funcall(rmodel, rb_intern(method), 0);    \
-    for (size_t i = 0; i < model->name.size(); i++) {        \
-      rb_ary_push(ary, r ## klass ## _new(&model->name[i])); \
-    }                                                        \
+  #define CONCAT_VECTOR_TO_RARRAY3(klass, name, method) {            \
+    VALUE ary = rb_funcall(rmodel, rb_intern(method), 0);            \
+    for (size_t i = 0; i < model->name.size(); i++) {                \
+      rb_ary_push(ary, r ## klass ## _new(&model->name[i], rmodel)); \
+    }                                                                \
   }
   #define CONCAT_VECTOR_TO_RARRAY(klass, name) CONCAT_VECTOR_TO_RARRAY3(klass, name, #name)
 

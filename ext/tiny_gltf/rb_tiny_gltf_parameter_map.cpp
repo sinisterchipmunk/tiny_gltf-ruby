@@ -1,6 +1,6 @@
 #include "rb_tiny_gltf.h"
 
-VALUE rParameterMap_new(const ParameterMap *value) {
+VALUE rParameterMap_new(const ParameterMap *value, VALUE rmodel) {
   VALUE res = Qnil;
 
   for (ParameterMap::const_iterator paramIt = value->begin(); paramIt != value->end();
@@ -19,7 +19,7 @@ VALUE rParameterMap_new(const ParameterMap *value) {
                paramIt->second.json_double_value.begin();
            it != paramIt->second.json_double_value.end(); ++it) {
         if (it->first == "index") {
-          rb_hash_aset(val, ID2SYM(rb_intern("index")), INT2NUM(paramIt->second.TextureIndex()));
+          rb_hash_aset(val, ID2SYM(rb_intern("index")), RINDEX_OR_NIL(paramIt->second.TextureIndex()));
         } else {
           rb_hash_aset(val, ID2SYM(rb_intern(it->first.c_str())), DBL2NUM(it->second));
         }

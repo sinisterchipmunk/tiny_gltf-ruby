@@ -74,7 +74,72 @@ void Init_tiny_gltf(void) {
   DEFINE_RB_GLTF_CLASS(Scene);
   DEFINE_RB_GLTF_CLASS(Light);
 
-  rb_define_method(rb_cAccessor, "byte_stride", Accessor_byte_stride, 1);
+  /*
+   * Document-method: to_ptr
+   *
+   * Returns a Fiddle::Pointer representing the start of the buffer data in
+   * memory. For performance, try to use this rather than #to_s.
+   */
+  rb_define_method(rb_cBuffer, "to_ptr", Buffer_to_ptr, 0);
+
+  /*
+   * Document-method: size
+   *
+   * Returns the size of the buffer data in bytes.
+   */
+  rb_define_method(rb_cBuffer, "size",   Buffer_size,   0);
+
+  /*
+   * Document-method: to_s
+   *
+   * Returns a string containing the raw buffer data. For better performance,
+   * prefer #to_ptr where possible.
+   */
+  rb_define_method(rb_cBuffer, "to_s",   Buffer_to_s,   0);
+
+  /*
+   * Document-method: uri
+   *
+   * Returns the URI from which this data was retrieved, if available. Returns
+   * `nil` if a URI was not used.
+   */
+  rb_define_method(rb_cBuffer, "uri",    Buffer_uri,    0);
+
+  /*
+   * Document-method: uri=
+   */
+  rb_define_method(rb_cImage,  "uri=",   Image_set_uri, 1);
+
+  /*
+   * Document-method: to_ptr
+   *
+   * Returns a Fiddle::Pointer representing the start of the image data in
+   * memory. For performance, try to use this rather than #to_s.
+   */
+  rb_define_method(rb_cImage,  "to_ptr", Image_to_ptr,  0);
+
+  /*
+   * Document-method: size
+   *
+   * Returns the size of the image data in bytes.
+   */
+  rb_define_method(rb_cImage,  "size",   Image_size,    0);
+
+  /*
+   * Document-method: to_s
+   *
+   * Returns a string containing the raw image data. For better performance,
+   * prefer #to_ptr where possible.
+   */
+  rb_define_method(rb_cImage,  "to_s",   Image_to_s,    0);
+
+  /*
+   * Document-method: uri
+   *
+   * Returns the URI from which this data was retrieved, if available. Returns
+   * `nil` if a URI was not used.
+   */
+  rb_define_method(rb_cImage,  "uri",    Image_uri,     0);
 
   rb_eTinyGLTFError = rb_define_class_under(rb_mTinyGLTF, "Error", rb_eStandardError);
   rb_define_singleton_method(rb_mTinyGLTF, "load", rb_tgltf_load, -1);
