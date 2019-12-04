@@ -1,0 +1,3 @@
+[submodule "test/fixtures/gltf_sample_models"]
+	path = test/fixtures/gltf_sample_models
+	url = https://github.com/KhronosGroup/glTF-Sample-Models
