@@ -203,7 +203,6 @@ class TinyGltfTest < Minitest::Test
                  json.materials[0].values)
     assert_equal({emissiveFactor: [1.0, 1.0, 1.0],
                   emissiveTexture: {index: 3},
-                  name: "BoomBox_Mat",
                   normalTexture: {index: 2},
                   occlusionTexture: {index: 1}},
                  json.materials[0].additional_values)

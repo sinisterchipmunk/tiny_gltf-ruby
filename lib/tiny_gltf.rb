@@ -386,7 +386,6 @@ module TinyGLTF
     attr_inspectable :primitives
     # weights to be applied to the Morph Targets
     attr_inspectable :weights
-    attr_inspectable :morph_targets
     attr_inspectable :extensions
     attr_inspectable :extras
   end

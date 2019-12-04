@@ -3,7 +3,7 @@
 VALUE rValue_new(const Value *value, VALUE rmodel) {
   switch(value->Type()) {
     case NULL_TYPE:   return Qnil;
-    case NUMBER_TYPE: return DBL2NUM(value->Get<double>());
+    case REAL_TYPE:   return DBL2NUM(value->Get<double>());
     case INT_TYPE:    return INT2NUM(value->Get<int>());
     case BOOL_TYPE:   return value->Get<bool>() ? Qtrue : Qfalse;
     case STRING_TYPE: return rb_str_new2(value->Get<std::string>().c_str());
@@ -27,6 +27,7 @@ VALUE rValue_new(const Value *value, VALUE rmodel) {
       return hash;
     }
     default:
+      rb_raise(rb_eRuntimeError, "Don't know what to do with GLTF type %d", (int) value->Type());
       return Qnil;
   }
 }

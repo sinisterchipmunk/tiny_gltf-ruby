@@ -42,7 +42,7 @@ VALUE Image_set_uri(VALUE self, VALUE ruri) {
       Image img;
       rb_ivar_set(self, rb_intern("@mime_type"),  rb_str_new2(mime_type.c_str()));
       memset(&img, 0, sizeof(img));
-      if (tinygltf::LoadImageData(&img, &err, &warn, 0, 0, data.data(), (int) data.size(), NULL)) {
+      if (tinygltf::LoadImageData(&img, -1, &err, &warn, 0, 0, data.data(), (int) data.size(), NULL)) {
         Image_set_image_data(&img, self);
       } else {
         rb_raise(rb_eStandardError, "Could not parse image data: %s", err.c_str());
