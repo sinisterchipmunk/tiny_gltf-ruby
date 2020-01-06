@@ -15,8 +15,7 @@
     .function = {
       .dmark = NULL,
       .dfree = Model_free,
-      .dsize = Model_size,
-      .reserved = { 0, 0 }
+      .dsize = Model_size
     },
     .parent = NULL,
     .data = NULL,
@@ -49,8 +48,7 @@
     .function = {                                                   \
       .dmark = NULL,                                                \
       .dfree = klass ## _free,                                      \
-      .dsize = klass ## _size,                                      \
-      .reserved = { 0, 0 }                                          \
+      .dsize = klass ## _size                                       \
     },                                                              \
     .parent = NULL,                                                 \
     .data = NULL,                                                   \
