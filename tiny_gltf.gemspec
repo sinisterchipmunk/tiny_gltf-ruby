@@ -33,8 +33,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.extensions    = ["ext/tiny_gltf/extconf.rb"]
 
-  spec.add_development_dependency "bundler", "~> 2.0.a"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler", "~> 2.1.0"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rake-compiler"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "yard", "~> 0.9"
