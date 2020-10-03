@@ -7,6 +7,7 @@
 #endif
 
 #include <time.h> // work around C++/C linkage error on some platforms
+#include "ruby.h"
 
 #if __cplusplus
   #include <algorithm>
@@ -14,8 +15,6 @@
   using namespace tinygltf;
   extern "C" {
 #endif
-
-#include "ruby.h"
 
 void Init_tiny_gltf(void);
 VALUE rb_tgltf_load(int argc, VALUE *argv, VALUE self);
