@@ -11,7 +11,7 @@ GEM
     rake (13.0.1)
     rake-compiler (1.1.1)
       rake
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     yard (0.9.25)
 
 PLATFORMS
