@@ -81,6 +81,7 @@ class TinyGltfTest < Minitest::Test
     assert_equal gltf.accessors[6], gltf.meshes[0].primitives[0].morph_targets[1][:normal]
     assert_equal gltf.accessors[7], gltf.meshes[0].primitives[0].morph_targets[1][:position]
     assert_equal gltf.accessors[8], gltf.meshes[0].primitives[0].morph_targets[1][:tangent]
+    assert_equal [0, 0], gltf.meshes[0].weights
   end
 
   def test_nodes

@@ -11,7 +11,7 @@ VALUE rMesh_new(const Mesh *mesh, VALUE rmodel) {
 
   VALUE rweights = rb_ary_new();
   for (size_t i = 0; i < mesh->weights.size(); i++) {
-    rb_ary_push(rprimitives, DBL2NUM(mesh->weights[i]));
+    rb_ary_push(rweights, DBL2NUM(mesh->weights[i]));
   }
 
   rb_ivar_set(rmesh, rb_intern("@model"),          rmodel);
