@@ -14,6 +14,16 @@ VALUE rNode_new(const Node *node, VALUE rmodel) {
 
   VALUE rmatrix = Qnil, rrotation = Qnil, rtranslation = Qnil, rscale = Qnil;
   if (node->matrix.size() == 0) {
+    rtranslation = rb_ary_new();
+    if (node->translation.size() == 0) {
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
+    } else {
+      for (size_t i = 0; i < node->translation.size(); i++)
+        rb_ary_push(rtranslation, DBL2NUM(node->translation[i]));
+    }
+
     rrotation = rb_ary_new();
     if (node->rotation.size() == 0) {
       rb_ary_push(rrotation, DBL2NUM(0.0));
@@ -26,23 +36,13 @@ VALUE rNode_new(const Node *node, VALUE rmodel) {
     }
 
     rscale = rb_ary_new();
-    if (node->rotation.size() == 0) {
-      rb_ary_push(rscale, DBL2NUM(0.0));
-      rb_ary_push(rscale, DBL2NUM(0.0));
-      rb_ary_push(rscale, DBL2NUM(0.0));
+    if (node->scale.size() == 0) {
+      rb_ary_push(rscale, DBL2NUM(1.0));
+      rb_ary_push(rscale, DBL2NUM(1.0));
+      rb_ary_push(rscale, DBL2NUM(1.0));
     } else {
       for (size_t i = 0; i < node->scale.size(); i++)
         rb_ary_push(rscale, DBL2NUM(node->scale[i]));
-    }
-
-    rtranslation = rb_ary_new();
-    if (node->translation.size() == 0) {
-      rb_ary_push(rtranslation, DBL2NUM(0.0));
-      rb_ary_push(rtranslation, DBL2NUM(0.0));
-      rb_ary_push(rtranslation, DBL2NUM(0.0));
-    } else {
-      for (size_t i = 0; i < node->translation.size(); i++)
-        rb_ary_push(rtranslation, DBL2NUM(node->translation[i]));
     }
   } else {
     rmatrix = rb_ary_new();

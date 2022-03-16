@@ -149,6 +149,10 @@ class TinyGltfTest < Minitest::Test
     assert_equal [ 0, -1.7941787242889404, 1.0036747455596924 ],   node.translation
     assert_equal [ 0.7071068286895752, 0, 0, 0.7071068286895752 ], node.rotation
     assert_equal [ 4.218648433685303, 1, 0.3652837574481964 ],     node.scale
+
+    node = model.nodes.detect { |node| node.name == 'Cube.009' }
+    # node does not define a scale, so default [1,1,1] should be used
+    assert_equal [1, 1, 1], node.scale
   end
 
   def test_boombox
