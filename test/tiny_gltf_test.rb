@@ -143,6 +143,14 @@ class TinyGltfTest < Minitest::Test
     assert_equal 4,                    model.default_image.components
   end
 
+  def test_node_trs
+    model = load_gltf('interpolation_test/InterpolationTest.glb')
+    node = model.nodes.detect { |node| node.name == 'Plane' }
+    assert_equal [ 0, -1.7941787242889404, 1.0036747455596924 ],   node.translation
+    assert_equal [ 0.7071068286895752, 0, 0, 0.7071068286895752 ], node.rotation
+    assert_equal [ 4.218648433685303, 1, 0.3652837574481964 ],     node.scale
+  end
+
   def test_boombox
     bin  = load_gltf('boombox/bin/BoomBox.glb')
     json = load_gltf('boombox/glTF/BoomBox.gltf')

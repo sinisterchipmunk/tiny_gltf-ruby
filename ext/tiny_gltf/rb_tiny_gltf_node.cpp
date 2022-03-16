@@ -16,38 +16,38 @@ VALUE rNode_new(const Node *node, VALUE rmodel) {
   if (node->matrix.size() == 0) {
     rrotation = rb_ary_new();
     if (node->rotation.size() == 0) {
-      rb_ary_push(rrotation, INT2NUM(0));
-      rb_ary_push(rrotation, INT2NUM(0));
-      rb_ary_push(rrotation, INT2NUM(0));
-      rb_ary_push(rrotation, INT2NUM(1));
+      rb_ary_push(rrotation, DBL2NUM(0.0));
+      rb_ary_push(rrotation, DBL2NUM(0.0));
+      rb_ary_push(rrotation, DBL2NUM(0.0));
+      rb_ary_push(rrotation, DBL2NUM(1.0));
     } else {
       for (size_t i = 0; i < node->rotation.size(); i++)
-        rb_ary_push(rrotation, INT2NUM(node->rotation[i]));
+        rb_ary_push(rrotation, DBL2NUM(node->rotation[i]));
     }
 
     rscale = rb_ary_new();
     if (node->rotation.size() == 0) {
-      rb_ary_push(rscale, INT2NUM(0));
-      rb_ary_push(rscale, INT2NUM(0));
-      rb_ary_push(rscale, INT2NUM(0));
+      rb_ary_push(rscale, DBL2NUM(0.0));
+      rb_ary_push(rscale, DBL2NUM(0.0));
+      rb_ary_push(rscale, DBL2NUM(0.0));
     } else {
       for (size_t i = 0; i < node->scale.size(); i++)
-        rb_ary_push(rscale, INT2NUM(node->scale[i]));
+        rb_ary_push(rscale, DBL2NUM(node->scale[i]));
     }
 
     rtranslation = rb_ary_new();
     if (node->translation.size() == 0) {
-      rb_ary_push(rtranslation, INT2NUM(0));
-      rb_ary_push(rtranslation, INT2NUM(0));
-      rb_ary_push(rtranslation, INT2NUM(0));
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
+      rb_ary_push(rtranslation, DBL2NUM(0.0));
     } else {
       for (size_t i = 0; i < node->translation.size(); i++)
-        rb_ary_push(rtranslation, INT2NUM(node->translation[i]));
+        rb_ary_push(rtranslation, DBL2NUM(node->translation[i]));
     }
   } else {
     rmatrix = rb_ary_new();
     for (size_t i = 0; i < node->matrix.size(); i++)
-      rb_ary_push(rmatrix, INT2NUM(node->matrix[i]));
+      rb_ary_push(rmatrix, DBL2NUM(node->matrix[i]));
   }
 
   rb_ivar_set(rnode, rb_intern("@model"),            rmodel);
