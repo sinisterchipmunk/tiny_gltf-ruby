@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiny_gltf (2.5.0.1)
+    tiny_gltf (2.5.0.2)
 
 GEM
   remote: https://rubygems.org/

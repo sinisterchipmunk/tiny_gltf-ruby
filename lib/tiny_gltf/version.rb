@@ -1,3 +1,3 @@
 module TinyGLTF
-  VERSION = "2.5.0.1"
+  VERSION = "2.5.0.2"
 end
