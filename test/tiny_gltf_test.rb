@@ -59,7 +59,7 @@ class TinyGltfTest < Minitest::Test
   end
 
   def test_images
-    gltf = load_gltf('Avocado/glTF-Binary/Avocado.glb')
+    gltf = load_gltf('avocado/glTF-Binary/Avocado.glb')
     assert_equal gltf.buffer_views[0], gltf.images[0].buffer_view
     assert_equal gltf.images[0].size,  gltf.images[0].to_ptr.size
   end
@@ -136,7 +136,7 @@ class TinyGltfTest < Minitest::Test
     model = TinyGLTF::Model.new
     # 1px opaque white png #FFFFFF alpha 1.0
     assert_equal "\xff\xff\xff\xff".b, model.default_image.to_s
-    assert_equal "\xff\xff\xff\xff".b, model.default_image.to_ptr.to_s
+    assert_equal "\xff\xff\xff\xff".b, model.default_image.to_ptr.yield_self { |ptr| ptr.to_s(ptr.size) }
     assert_equal 'image/png',          model.default_image.mime_type
     assert_equal 1,                    model.default_image.width
     assert_equal 1,                    model.default_image.height
