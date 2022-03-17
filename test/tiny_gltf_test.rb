@@ -64,10 +64,17 @@ class TinyGltfTest < Minitest::Test
     assert_equal gltf.images[0].size,  gltf.images[0].to_ptr.size
   end
 
+  def test_indices
+    gltf = load_gltf('cube/Cube.gltf')
+    assert_equal gltf.accessors[0], gltf.meshes[0].primitives[0].indices
+
+    gltf = load_gltf('fox/Fox.glb')
+    assert_nil gltf.meshes[0].primitives[0].indices
+  end
+
   def test_primitives
     gltf = load_gltf('cube/Cube.gltf')
     assert_equal :triangles, gltf.meshes[0].primitives[0].mode
-    assert_equal gltf.accessors[0], gltf.meshes[0].primitives[0].indices
     assert_equal gltf.accessors[1], gltf.meshes[0].primitives[0].accessors[:position]
     assert_equal gltf.accessors[2], gltf.meshes[0].primitives[0].accessors[:normal]
     assert_equal gltf.accessors[3], gltf.meshes[0].primitives[0].accessors[:tangent]

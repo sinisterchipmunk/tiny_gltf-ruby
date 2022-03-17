@@ -356,7 +356,7 @@ module TinyGLTF
     attr_inspectable :extras
 
     def indices
-      model.accessors[indices_index]
+      indices_index && model.accessors[indices_index]
     end
 
     def accessors
