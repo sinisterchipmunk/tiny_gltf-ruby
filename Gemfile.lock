@@ -12,9 +12,7 @@ GEM
     rake-compiler (1.1.9)
       rake
     redcarpet (3.5.1)
-    webrick (1.7.0)
-    yard (0.9.27)
-      webrick (~> 1.7.0)
+    yard (0.9.36)
 
 PLATFORMS
   ruby
