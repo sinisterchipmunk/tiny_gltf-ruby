@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiny_gltf (2.5.0.4)
+    tiny_gltf (2.5.0.5)
 
 GEM
   remote: https://rubygems.org/
@@ -30,4 +30,4 @@ DEPENDENCIES
   yard (~> 0.9)
 
 BUNDLED WITH
-   2.2.0.rc.1
+   2.5.17

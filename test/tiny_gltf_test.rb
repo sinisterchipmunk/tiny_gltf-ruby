@@ -26,6 +26,18 @@ class TinyGltfTest < Minitest::Test
     assert_nil gltf.animations[0].channels[0].extras
   end
 
+  def test_lights
+    gltf = load_gltf('directional_light/DirectionalLight.gltf')
+    assert_equal 1, gltf.lights.count
+    assert_equal 'Sun', gltf.lights[0].name
+    assert_equal [0.9, 0.8, 0.1], gltf.lights[0].color
+    assert_equal :directional, gltf.lights[0].type
+    assert_equal 1.0, gltf.lights[0].intensity
+    assert_equal 0.0, gltf.lights[0].range
+    assert_equal 0.0, gltf.lights[0].inner_cone_angle
+    assert_equal 0.0, gltf.lights[0].outer_cone_angle
+  end
+
   def test_buffers_and_buffer_views
     gltf = load_gltf('cube/Cube.gltf')
     assert_equal gltf.buffer_views[0], gltf.accessors[0].buffer_view

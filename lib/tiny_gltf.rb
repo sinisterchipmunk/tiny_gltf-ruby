@@ -335,6 +335,10 @@ module TinyGLTF
     attr_inspectable :name
     attr_inspectable :color
     attr_inspectable :type
+    attr_inspectable :intensity
+    attr_inspectable :range
+    attr_inspectable :inner_cone_angle
+    attr_inspectable :outer_cone_angle
   end
 
   class Primitive
